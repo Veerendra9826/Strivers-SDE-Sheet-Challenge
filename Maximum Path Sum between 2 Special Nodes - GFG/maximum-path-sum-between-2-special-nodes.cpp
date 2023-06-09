@@ -92,41 +92,61 @@ struct Node
 
 class Solution {
     public:
-        int check(Node *root, int &max_sum, Node *head) {
-        if(root == NULL)
-            return 0;
-            
-        int left_sum = check(root->left, max_sum, head);
-        int right_sum = check(root->right, max_sum, head);
-        
-        if(root->left != NULL && root->right != NULL) {
-            max_sum = max(left_sum + right_sum + root->data, max_sum);
-        }
-        
-        if(root == head) {
-            if(root->left != NULL && root->right == NULL)
-                max_sum = max(left_sum + root->data, max_sum);
-            else if(root->left == NULL && root->right != NULL)
-                max_sum = max(right_sum + root->data, max_sum);
-        }
-        
-        if(root->left == NULL && root->right != NULL)
-            return right_sum + root->data;
-            
-        if(root->left != NULL && root->right == NULL)
-            return left_sum + root->data;
-        
-        return max(left_sum, right_sum) + root->data;
+int max(int a, int b)
+{ return (a >= b)? a: b; }
+ 
+// A utility function to find the maximum sum between any
+// two leaves.This function calculates two values:
+// 1) Maximum path sum between two leaves which is stored
+//    in res.
+// 2) The maximum root to leaf path sum which is returned.
+// If one side of root is empty, then it returns INT_MIN
+int maxPathSumUtil(struct Node *root, int &res)
+{
+    // Base cases
+    if (root==NULL) return 0;
+    if (!root->left && !root->right) return root->data;
+ 
+    // Find maximum sum in left and right subtree. Also
+    // find maximum root to leaf sums in left and right
+    // subtrees and store them in ls and rs
+    int ls = maxPathSumUtil(root->left, res);
+    int rs = maxPathSumUtil(root->right, res);
+ 
+ 
+    // If both left and right children exist
+    if (root->left && root->right)
+    {
+        // Update result if needed
+        res = max(res, ls + rs + root->data);
+ 
+        // Return maximum possible value for root being
+        // on one side
+        return max(ls, rs) + root->data;
     }
-    
+ 
+    // If any of the two children is empty, return
+    // root sum for root being on one side
+    return (!root->left)? rs + root->data:
+                          ls + root->data;
+}
     int maxPathSum(Node* root)
     {
-        if(root == NULL)
-            return 0;
-            
-        int max_sum = INT_MIN;
-        check(root, max_sum, root);
-        return max_sum;
+            int res = INT_MIN;
+   
+    int val = maxPathSumUtil(root, res);
+           
+      //--- for test case ---
+       //         7                
+      //        /    \              
+        //    Null   -3           
+      //     (case - 1)        
+      //   value of res will be INT_MIN but the answer is 4 , which is returned by the
+      // function maxPathSumUtil().
+   
+      if(root->left && root->right)
+            return res;
+        return max(res, val);
     }
 };
 
