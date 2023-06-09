@@ -115,46 +115,47 @@ class Solution
 {
 public:
    // Helper function to calculate the count of leaf nodes within budget
-void low(Node* root, unordered_map<int, int>& s, int* m, int l) {
+void calculateLeafCount(Node* root, unordered_map<int, int>& levelLeafCount, int* maxLevel, int level) {
     if (root != NULL) {
         // Update the maximum level encountered so far
-        *m = max(*m, l);
+        *maxLevel = max(*maxLevel, level);
 
         // Check if the current node is a leaf node
         if (root->left == NULL && root->right == NULL)
-            s[l]++; // Increment the count of leaf nodes at level l
+            levelLeafCount[level]++; // Increment the count of leaf nodes at level 'level'
 
         // Recursively traverse the left and right subtrees
-        low(root->left, s, m, l + 1);
-        low(root->right, s, m, l + 1);
+        calculateLeafCount(root->left, levelLeafCount, maxLevel, level + 1);
+        calculateLeafCount(root->right, levelLeafCount, maxLevel, level + 1);
     }
 }
 
 // Function to get the maximum count of leaf nodes that can be visited within budget k
 int getCount(Node* root, int k) {
-    unordered_map<int, int> s;
-    int c = 0, m = INT_MIN;
+    unordered_map<int, int> levelLeafCount;
+    int totalCount = 0;
+    int maxLevel = INT_MIN;
 
     // Calculate the maximum level encountered and count of leaf nodes at each level
-    low(root, s, &m, 1);
+    calculateLeafCount(root, levelLeafCount, &maxLevel, 1);
 
     // Iterate over levels from 1 to the maximum level encountered
-    for (int i = 1; i <= m;) {
-        if (s[i] > 0) {
-            if (k >= i) {
-                k -= i;
+    for (int level = 1; level <= maxLevel;) {
+        if (levelLeafCount[level] > 0) {
+            if (k >= level) {
+                k -= level;
             } else {
-                return c; // Return the current count if the remaining budget is not sufficient
+                return totalCount; // Return the current count if the remaining budget is not sufficient
             }
 
-            s[i]--; // Decrement the count of leaf nodes at level i
-            c++; // Increment the overall count of leaf nodes visited
+            levelLeafCount[level]--; // Decrement the count of leaf nodes at level 'level'
+            totalCount++; // Increment the overall count of leaf nodes visited
         } else {
-            i++; // Move to the next level if there are no leaf nodes at the current level
+            level++; // Move to the next level if there are no leaf nodes at the current level
         }
     }
 
-    return c; // Return the final count of leaf nodes visited
+    return totalCount; // Return the final count of leaf nodes visited
 }
 
 };
