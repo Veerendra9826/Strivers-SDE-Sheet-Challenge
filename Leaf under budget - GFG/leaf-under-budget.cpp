@@ -114,38 +114,49 @@ struct Node
 class Solution
 {
 public:
-    void low(Node* root,unordered_map<int,int>& s,int* m,int l)
-    {
-        if(root!=NULL)
-        {
-            *m=max(*m,l);
-            if(root->left==NULL && root->right==NULL)
-            s[l]++;
-            low(root->left,s,m,l+1);
-            low(root->right,s,m,l+1);
-        }
+   // Helper function to calculate the count of leaf nodes within budget
+void low(Node* root, unordered_map<int, int>& s, int* m, int l) {
+    if (root != NULL) {
+        // Update the maximum level encountered so far
+        *m = max(*m, l);
+
+        // Check if the current node is a leaf node
+        if (root->left == NULL && root->right == NULL)
+            s[l]++; // Increment the count of leaf nodes at level l
+
+        // Recursively traverse the left and right subtrees
+        low(root->left, s, m, l + 1);
+        low(root->right, s, m, l + 1);
     }
-    int getCount(Node *root, int k)
-    {
-        unordered_map<int,int> s;
-        int c=0,m=INT_MIN;
-        low(root,s,&m,1);
-        for(int i=1;i<=m;)
-        {
-            if(s[i]>0)
-            {
-                if(k>=i)
-                k-=i;
-                else
-                return c;
-                s[i]--;
-                c++;
+}
+
+// Function to get the maximum count of leaf nodes that can be visited within budget k
+int getCount(Node* root, int k) {
+    unordered_map<int, int> s;
+    int c = 0, m = INT_MIN;
+
+    // Calculate the maximum level encountered and count of leaf nodes at each level
+    low(root, s, &m, 1);
+
+    // Iterate over levels from 1 to the maximum level encountered
+    for (int i = 1; i <= m;) {
+        if (s[i] > 0) {
+            if (k >= i) {
+                k -= i;
+            } else {
+                return c; // Return the current count if the remaining budget is not sufficient
             }
-            else
-            i++;
+
+            s[i]--; // Decrement the count of leaf nodes at level i
+            c++; // Increment the overall count of leaf nodes visited
+        } else {
+            i++; // Move to the next level if there are no leaf nodes at the current level
         }
-        return c;
     }
+
+    return c; // Return the final count of leaf nodes visited
+}
+
 };
 
 //{ Driver Code Starts.
