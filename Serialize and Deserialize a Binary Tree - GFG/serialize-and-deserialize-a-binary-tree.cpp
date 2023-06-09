@@ -95,6 +95,7 @@ class Solution
     public:
     //Function to serialize a tree and return a list containing nodes of tree.
 // Function to serialize a tree using BFS with a queue
+// Function to serialize a tree using BFS with a queue
 vector<int> serialize(Node* root) {
     vector<int> serialized;
     if (root == nullptr)
