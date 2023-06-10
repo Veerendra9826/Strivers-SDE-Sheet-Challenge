@@ -31,33 +31,31 @@ int main() {
 // User function Template for C++
 
 // Function to reverse first k elements of a queue.
-void revK(queue<int> &q, int k)
-{
-    int N = q.size();
-    if(k == 0) return;
-    
-    int temp = q.front();
-    q.pop();
-    
-    revK(q, k-1);
-    
-    for(int i=0; i<k-1; i++)
-    {
-        int ele = q.front();
-        q.pop();
-        q.push(ele);
-    }
-    q.push(temp);
-    for(int i=0; i<N-k; i++)
-    {
-        int ele = q.front();
-        q.pop();
-        q.push(ele);
-    }
-}
 queue<int> modifyQueue(queue<int> q, int k) {
-    
-    revK(q, k);
-    
-    return q;
+       queue<int> modifiedQueue; // New queue to store modified elements
+    int size = q.size(); // Size of the original queue
+    int j = 0; // Counter for swapping elements
+    int arr[size]; // Array to temporarily store elements from the original queue
+
+    // Extract elements from the original queue and store them in the array
+    for (int i = 0; i < size; i++) {
+        arr[i] = q.front();
+        q.pop();
+    }
+
+    // Swap elements from index j to index k-1
+    while (j < k) {
+        int temp = arr[j];
+        arr[j] = arr[k - 1];
+        arr[k - 1] = temp;
+        j++;
+        k--;
+    }
+
+    // Push the modified elements back to the new queue
+    for (int i = 0; i < size; i++) {
+        modifiedQueue.push(arr[i]);
+    }
+
+    return modifiedQueue; // Return the modified queue
 }
