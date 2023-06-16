@@ -13,35 +13,33 @@ class Solution{
     public:
     vector<int> help_classmate(vector<int> arr, int n) 
     { 
-        vector<int> v;
-       
-        int i=0;int j=i+1;
-        while(i<n){
-        if(arr[i]>arr[j])
-        {
-            v.push_back(arr[j]);
-         
-            i++;
-               j=i+1;
-          
-          }
-          else if( j>=n-1){
-           
-             v.push_back(-1);
-             i++;
-             j=i+1;
-          }
-          else
-          j++;
-         
-        } 
-        v[n-1]=-1; 
-      return v;
-    } 
-
-
-
+        vector<int>result;
+         int i = 0; // Index of the current element
+    int j = i + 1; // Index of the next element
     
+    // Iterate over the array elements
+    while (i < n) {
+        if (arr[i] > arr[j]) {
+            result.push_back(arr[j]); // Push the next smaller element to the result vector
+            
+            i++; // Move to the next element
+            j = i + 1; // Update the next element index
+        }
+        else if (j >= n - 1) {
+            result.push_back(-1); // No smaller element exists on the right side, so push -1
+            
+            i++; // Move to the next element
+            j = i + 1; // Update the next element index
+        }
+        else {
+            j++; // Move to the next element
+        }
+    }
+    
+    result[n - 1] = -1; // Set the NSE for the rightmost element as -1
+    
+    return result;
+    } 
 };
 
 //{ Driver Code Starts.
