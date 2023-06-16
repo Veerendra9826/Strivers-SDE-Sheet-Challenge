@@ -13,21 +13,27 @@ class Solution{
     public:
     vector<int> help_classmate(vector<int> arr, int n) 
     { 
-        vector<int>result;
-         int i = 0; // Index of the current element
+       vector<int> result; // Store the Next Smaller Element
+                        // (NSE) for each element
+
+    int i = 0; // Index of the current element
     int j = i + 1; // Index of the next element
-    
+
     // Iterate over the array elements
     while (i < n) {
         if (arr[i] > arr[j]) {
-            result.push_back(arr[j]); // Push the next smaller element to the result vector
-            
+            result.push_back(
+                arr[j]); // Push the next smaller element to
+                         // the result vector
+
             i++; // Move to the next element
             j = i + 1; // Update the next element index
         }
         else if (j >= n - 1) {
-            result.push_back(-1); // No smaller element exists on the right side, so push -1
-            
+            result.push_back(
+                -1); // No smaller element exists on the
+                     // right side, so push -1
+
             i++; // Move to the next element
             j = i + 1; // Update the next element index
         }
@@ -35,9 +41,10 @@ class Solution{
             j++; // Move to the next element
         }
     }
-    
-    result[n - 1] = -1; // Set the NSE for the rightmost element as -1
-    
+
+    result[n - 1]
+        = -1; // Set the NSE for the rightmost element as -1
+
     return result;
     } 
 };
