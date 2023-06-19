@@ -14,6 +14,7 @@ class Solution{
   public:
     vector<int> countEleLessThanOrEqual(int arr1[], int arr2[], int m, int n){
      vector<int> result;
+    // int result[m];
     int frequency[100010] = {0}; // Hash table to store frequency of elements
 
     // Calculate frequency of elements in arr2
@@ -34,6 +35,10 @@ class Solution{
         result.push_back(prefixSum[arr1[i]]);
     }
     
+    // cout << "Output: ";
+    // for (int i = 0; i < m; ++i) {
+    //   result.push_back()
+    // }
     return result;
     }
 };
