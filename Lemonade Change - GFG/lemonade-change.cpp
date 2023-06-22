@@ -7,12 +7,13 @@ using namespace std;
 class Solution {
   public:
     bool lemonadeChange(int N, vector<int> &bills) {
-        if(bills[0] == 10 || bills[0] == 20){
-            return false;
-        }
         int f5 = 0;
         int f10 = 0;
         int f20 = 0;
+
+        if(bills[0] == 10 || bills[0] == 20){
+            return false;
+        }
         for(int i = 0;i<N;i++){
             if(bills[i] == 5){
                 f5++;
