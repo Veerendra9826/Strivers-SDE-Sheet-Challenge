@@ -17,10 +17,9 @@ class Solution
         if(n1!=n2) return false;
         for(int i = 0;i<n1;i++){
             mp[a[i]]++;
-        }
-          for(int i = 0;i<n2;i++){
             mp[b[i]]--;
         }
+       
        for(auto i:mp){
            if(i.second != 0){
                return false;
