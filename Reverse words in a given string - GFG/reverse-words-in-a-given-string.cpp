@@ -10,17 +10,31 @@ class Solution
     //Function to reverse words in a given string.
     string reverseWords(string S) 
     { 
-string ans,temp;
-        for(int i = 0; i<S.size(); i++){
-            if(S[i] == '.'){
-                ans = '.'+temp + ans;
-                temp = "";
-            }else{
-                temp = temp+S[i];
+        int i = S.length() - 1;
+        string ans = "";
+        while(i>=0){
+            while(i>=0 && S[i] == '.'){
+                i--;
             }
-            
+            int j = i;
+            if(i<0){
+                break;
+            }
+            while(i>=0 && S[i] != '.'){
+                i--;
+            }
+             if (ans.empty()) {
+            ans = ans.append(S.substr(i + 1, j - i));
+        } else {
+            ans = ans.append("." + S.substr(i + 1, j - i));
         }
-        ans = temp+ans;
+            // if(ans.empty()){
+            //     ans = ans.append(S.substr(i+1,j-i));
+            // }
+            // else{
+            //     ans = ans.apppend("." + S.substr(i+1,j-i));
+            // }
+        }
         return ans;
     } 
 };
