@@ -96,11 +96,11 @@ class Solution{
         if(root == NULL){
             return 0;
         }
-        int leftd = maxDepth(root->left);
-        leftd++;
-        int rightd = maxDepth(root->right);
-        rightd++;
-        return max(leftd,rightd);
+        int leftdepth = maxDepth(root->left);
+        leftdepth++;
+        int rightdepth = maxDepth(root->right);
+        rightdepth++;
+        return max(leftdepth,rightdepth);
     }
 };
 
