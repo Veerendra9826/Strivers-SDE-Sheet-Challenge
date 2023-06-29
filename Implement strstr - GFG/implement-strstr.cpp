@@ -26,13 +26,10 @@ int main()
 //Function to locate the occurrence of the string x in the string s.
 int strstr(string s, string x)
 {
-     for(int i = 0;i<s.length();i++){
-         for(int j =  i;j<s.length();j++){
-             string sub = s.substr(i,x.length());
-             if(sub == x){
-                 return i;
-             }
-         }
-     }
-     return -1;
+    size_t found=s.find(x);
+    if (found != string::npos){
+        return found;
+    }
+    else return -1;
+
 }
