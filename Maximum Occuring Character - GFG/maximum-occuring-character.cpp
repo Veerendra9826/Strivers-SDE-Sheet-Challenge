@@ -12,21 +12,28 @@ class Solution
     //Function to find the maximum occurring character in a string.
     char getMaxOccuringChar(string str)
     {
-int charCount[26] = {0}; // Initialize count array with zeros for lowercase alphabets
+  sort(str.begin(), str.end()); // Sort the string in lexicographical order
+
+    char maxChar = str[0];
+    int maxCount = 1;
+    int count = 1;
 
     int length = str.length();
-    for (int i = 0; i < length; i++) {
-        charCount[str[i] - 'a']++; // Increment the count for the corresponding alphabet
+    for (int i = 1; i < length; i++) {
+        if (str[i] == str[i - 1]) {
+            count++; // Increment count if the current character is the same as the previous one
+        } else {
+            if (count > maxCount || (count == maxCount && str[i] < maxChar)) {
+                maxChar = str[i - 1];
+                maxCount = count;
+            }
+            count = 1; // Reset count for a new character
+        }
     }
 
-    char maxChar = 'a';
-    int maxCount = charCount[0];
-
-    for (int i = 1; i < 26; i++) {
-        if (charCount[i] > maxCount || (charCount[i] == maxCount && ('a' + i) < maxChar)) {
-            maxChar = 'a' + i; // Get the corresponding alphabet
-            maxCount = charCount[i];
-        }
+    // Check the count for the last character
+    if (count > maxCount || (count == maxCount && str[length - 1] < maxChar)) {
+        maxChar = str[length - 1];
     }
 
     return maxChar;
