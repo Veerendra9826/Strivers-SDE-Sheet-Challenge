@@ -12,16 +12,22 @@ class Solution
     //Function to check if a string is Isogram or not.
     bool isIsogram(string s)
     {
-       unordered_map<char,int>mp;
-       for(int i = 0;i<s.length();i++){
-           mp[s[i]]++;
-       }
-       for(auto i:mp){
-           if(i.second > 1){
-               return false;
-           }
-       }
-       return true;
+ bitset<26> occurrence;
+    
+    for (char ch : s) {
+        // Calculate the index of the character in the bitset
+        int index = ch - 'a';
+        
+        // Check if the character has already occurred
+        if (occurrence[index]) {
+            return false;
+        }
+        
+        // Mark the character as occurred
+        occurrence[index] = true;
+    }
+    
+    return true;
     }
 };
 
