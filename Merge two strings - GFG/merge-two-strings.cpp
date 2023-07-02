@@ -24,22 +24,29 @@ int main()
 
 string merge (string S1, string S2)
 {
-int i = 0;
-int j = 0;
-string S3 = "";
-while(i<S1.length() && j<S2.length()){
-    S3 += S1[i];
-    i++;
-    S3 += S2[j];
-    j++;
-}
-while(i<S1.length()){
-    S3 += S1[i];
-    i++;
-}
-while(j<S2.length()){
-    S3 += S2[j];
-    j++;
-}
-return S3;
+int i = 0; // Pointer for string 1
+    int j = 0; // Pointer for string 2
+    std::string result; // Final string
+
+    // Merge the strings alternately until one of them reaches its end
+    while (i < S1.length() && j < S2.length()) {
+        result.push_back(S1[i]);
+        result.push_back(S2[j]);
+        i++;
+        j++;
+    }
+
+    // Append remaining characters from string 1, if any
+    while (i < S1.length()) {
+        result.push_back(S1[i]);
+        i++;
+    }
+
+    // Append remaining characters from string 2, if any
+    while (j < S2.length()) {
+        result.push_back(S2[j]);
+        j++;
+    }
+
+    return result;
 }
