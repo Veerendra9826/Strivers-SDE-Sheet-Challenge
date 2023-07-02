@@ -29,19 +29,16 @@ int main()
 // to be removed to make two strings anagram
 int remAnagram(string str1, string str2)
 {
-int arr1[26]={0},arr2[26]={0};
-  for(int i=0;i<str1.size();i++)
-  {
-      arr1[str1[i]-'a']++;
-  }
-  for(int i=0;i<str2.size();i++)
-  {
-      arr2[str2[i]-'a']++;
-  }
-  int count=0;
-  for(int i=0;i<26;i++)
-  {
-      count=count+abs(arr1[i]-arr2[i]);
-  }
-  return count;
+map<char,int>mp;
+int x = 0;
+for(int i = 0;i<str1.length();i++){
+    mp[str1[i]]++;
+}
+for(int i = 0;i<str2.length();i++){
+    mp[str2[i]]--;
+}
+for(auto i:mp){
+    x += abs(i.second);
+}
+return x;
 }
