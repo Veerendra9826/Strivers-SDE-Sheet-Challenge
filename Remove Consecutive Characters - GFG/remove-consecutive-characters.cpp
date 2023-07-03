@@ -9,17 +9,11 @@ class Solution{
     string removeConsecutiveCharacter(string S)
     {
         
-        string str = "";
-        // if(S.length() == 0){
-        //     return str;
-        // }
-        for(int i = 0;i<S.length()-1;i++){
-            if(S[i] != S[i+1]){
-                str += S[i];
-            }
-        }
-        str.push_back(S[S.length()-1]);
-        return str;
+            // Create a regular expression pattern that matches any character followed by one or more occurrences of the same character
+    regex pattern("(.)\\1+");
+    
+    // Use the regex_replace function to replace all occurrences of the pattern in the string with a single occurrence of the matched character
+    return regex_replace(S, pattern, "$1");
     }
 };
 
