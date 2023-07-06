@@ -7,44 +7,20 @@ using namespace std;
 class Solution{
     public:
         //Function to merge the arrays.
-       void merge(long long arr1[], long long arr2[], int n, int m) 
-{
-   int mn = m + n;  // Total number of elements in the merged array
-   int i = 0, j = 0, k = 0;  // Index variables for arr1, arr2, and arr3 respectively
-   int arr3[mn];  // Array to store the merged elements
-   
-   // Merge the arrays arr1 and arr2
-   while (i < n && j < m) {
-       if (arr1[i] < arr2[j]) {
-           arr3[k++] = arr1[i++];  // Add the smaller element from arr1 to arr3
-       } else {
-           arr3[k++] = arr2[j++];  // Add the smaller element from arr2 to arr3
-       }
-   }
-   
-   // Add remaining elements from arr1, if any
-   while (i < n) {
-       arr3[k++] = arr1[i++];
-   }
-   
-   // Add remaining elements from arr2, if any
-   while (j < m) {
-       arr3[k++] = arr2[j++];
-   }
-   
-   // Update arr1 with the merged elements
-   k = 0;
-   for (i = 0; i < n; i++) {
-       arr1[i] = arr3[k++];
-   }
-   
-   // Update arr2 with the merged elements
-   j = 0;
-   for (k = n; k < mn; k++) {
-       arr2[j++] = arr3[k];
-   }
-}
-
+        void merge(long long arr1[], long long arr2[], int n, int m) 
+        { 
+            int low = n-1,high = 0;
+            while(low >= 0 && high < m){
+                if(arr1[low] >= arr2[high]){
+                    swap(arr1[low],arr2[high]);
+                    
+                }
+                low--;
+                high++;
+            }
+            sort(arr1,arr1+n);
+            sort(arr2,arr2+m);
+        } 
 };
 
 //{ Driver Code Starts.
