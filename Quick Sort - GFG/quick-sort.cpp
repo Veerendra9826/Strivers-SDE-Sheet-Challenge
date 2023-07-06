@@ -16,54 +16,71 @@ void printArray(int arr[], int size)
 class Solution
 {
     public:
-    //Function to sort an array using quick sort algorithm.
+// Function to sort an array using the quicksort algorithm.
     void quickSort(int arr[], int low, int high)
     {
-       //base case
-    if(low >= high) 
-        return ;
+        // Base case: If the partition size is 0 or 1, the array is already sorted.
+        if (low >= high)
+            return;
 
-    //partitioon karenfe
-    int p = partition(arr, low, high);
+        // Partition the array and get the pivot index.
+        int p = partition(arr, low, high);
 
-    //left part sort karo
-    quickSort(arr, low, p-1);
-
-    //right wala part sort karo
-    quickSort(arr, p+1, high);
-
-           
+        // Recursively sort the left and right subarrays.
+        quickSort(arr, low, p - 1);
+        quickSort(arr, p + 1, high);
     }
-    
-    public:
-    int partition (int arr[], int low, int high)
+
+public:
+    // Function to partition the array and return the pivot index.
+    int partition(int arr[], int low, int high)
     {
-       int pivot  = arr[low];
-       int cnt = 0;
-       for(int i = low+1;i<=high;i++){
-           if(arr[i] <= pivot){
-               cnt++;
-           }
-       }
-      int pivotindex = low + cnt;
-      swap(arr[pivotindex],arr[low]);
-      
-      int i = low,j = high;
-      
-      while(i<pivotindex && j>pivotindex){
-          while(arr[i] <= pivot){
-              i++;
-          }
-          while(arr[j] > pivot){
-              j--;
-          }
-          
-          if(i<pivotindex && j>pivotindex){
-              swap(arr[i++],arr[j--]);
-          }
-      }
-      
-     return pivotindex;
+        // Choose the first element as the pivot.
+        int pivot = arr[low];
+        int cnt = 0;
+
+        // Count the number of elements smaller or equal to the pivot.
+        for (int i = low + 1; i <= high; i++)
+        {
+            if (arr[i] <= pivot)
+            {
+                cnt++;
+            }
+        }
+
+        // Calculate the index where the pivot should be placed.
+        int pivotindex = low + cnt;
+
+        // Swap the pivot with the element at the pivot index.
+        swap(arr[pivotindex], arr[low]);
+
+        // Initialize two pointers, i and j.
+        int i = low, j = high;
+
+        // Move i to the right and j to the left, swapping elements as necessary.
+        while (i < pivotindex && j > pivotindex)
+        {
+            // Move i to the right until an element greater than the pivot is found.
+            while (arr[i] <= pivot)
+            {
+                i++;
+            }
+
+            // Move j to the left until an element smaller or equal to the pivot is found.
+            while (arr[j] > pivot)
+            {
+                j--;
+            }
+
+            // If i and j have not crossed each other, swap the elements at i and j.
+            if (i < pivotindex && j > pivotindex)
+            {
+                swap(arr[i++], arr[j--]);
+            }
+        }
+
+        // Return the pivot index.
+        return pivotindex;
     }
 };
 
