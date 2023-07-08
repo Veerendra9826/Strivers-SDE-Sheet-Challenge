@@ -12,29 +12,44 @@ using namespace std;
 class Solution{
   public:
     //Function to find triplets with zero sum.
-    bool findTriplets(int arr[], int n)
-    { 
-        sort(arr,arr+n);
-        int i = 0;
-        while(i<n){
-            int j = i+1;
-            int k = n-1;
-            while(j<k){
-                if(arr[j]+arr[k] < -(arr[i])){
-                    j++;
-                }
-                else if(arr[j]+arr[k] > -arr[i]){
-                    k--;
-                }
-                else {
-                    return true;
-                }
-
+ bool findTriplets(int arr[], int n)
+{ 
+    // Sorting the array in ascending order
+    sort(arr,arr+n);
+    
+    // Initializing the first pointer
+    int i = 0;
+    
+    // Loop through the array
+    while(i<n){
+        // Initializing the second pointer
+        int j = i+1;
+        
+        // Initializing the third pointer
+        int k = n-1;
+        
+        // Check for triplets
+        while(j<k){
+            // If the sum of the second and third elements is less than the negation of the first element
+            if(arr[j]+arr[k] < -(arr[i])){
+                j++; // Move the second pointer to the right
             }
-            i++;
+            // If the sum of the second and third elements is greater than the negation of the first element
+            else if(arr[j]+arr[k] > -arr[i]){
+                k--; // Move the third pointer to the left
+            }
+            else {
+                return true; // Triplet found
+            }
         }
-        return false;
+        
+        // Move the first pointer to the right
+        i++;
     }
+    
+    return false; // No triplet found
+}
+
 };
 
 //{ Driver Code Starts.
