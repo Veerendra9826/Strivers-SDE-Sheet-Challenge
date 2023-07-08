@@ -15,7 +15,8 @@ class Solution{
     bool findTriplets(int arr[], int n)
     { 
         sort(arr,arr+n);
-        for(int i= 0;i<n;i++){
+        int i = 0;
+        while(i<n){
             int j = i+1;
             int k = n-1;
             while(j<k){
@@ -25,11 +26,12 @@ class Solution{
                 else if(arr[j]+arr[k] > -arr[i]){
                     k--;
                 }
-                else{
+                else {
                     return true;
                 }
 
             }
+            i++;
         }
         return false;
     }
