@@ -18,9 +18,9 @@ class Solution {
             if(mp.find(string1[i]) == mp.end()){
                 ans += string1[i];
             }
-            else{
-                mp[string1[i]]--;
-            }
+            // else{
+            //     mp[string1[i]]--;
+            // }
         }
         return ans;
     }
