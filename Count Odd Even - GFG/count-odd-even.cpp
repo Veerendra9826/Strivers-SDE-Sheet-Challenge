@@ -17,17 +17,19 @@ class Solution{
     void countOddEven(int arr[], int sizeof_array)
     {
         
-        int oddcnt = 0;
-        int evencnt = 0;
-        for(int i  = 0;i<sizeof_array;i++){
-            if(arr[i]%2 == 0){
-                evencnt++;
-            }
-            else{
-                oddcnt++;
-            }
+      int   evenCount = 0;
+    int oddCount = 0;
+
+    for (int i = 0; i < sizeof_array; i++) {
+        if (arr[i] & 1) {
+            // If the least significant bit is 1, the number is odd
+            oddCount++;
+        } else {
+            // If the least significant bit is 0, the number is even
+            evenCount++;
         }
-       cout<<oddcnt<<" "<<evencnt<<endl;
+    }
+       cout<<oddCount<<" "<<evenCount<<endl;
         
     }
 };
