@@ -34,20 +34,40 @@ class Solution
     public:
     //Function to sort a linked list of 0s, 1s and 2s.
     Node* segregate(Node *head) {
-        vector<int>vec;
+        
+        int zerocnt =0;
+        int onecnt = 0;
+        int twocnt = 0;
         Node* temp = head;
         while(temp){
-            vec.push_back(temp->data);
+            if(temp->data == 0){
+                zerocnt++;
+            }
+            else if(temp->data == 1){
+                onecnt++;
+            }
+            else if(temp->data == 2){
+                twocnt++;
+            }
             temp = temp->next;
         }
-        sort(vec.begin(),vec.end());
-        Node* newhead = new Node(vec[0]);
-        temp = newhead;
-        for(int i = 1;i<vec.size();i++){
-            temp->next = new Node(vec[i]);
+        temp = head;
+        while(temp){
+            if(zerocnt != 0){
+                temp->data = 0;
+                zerocnt--;
+            }
+            else if(onecnt != 0){
+                temp->data = 1;
+                onecnt--;
+            }
+            else if(twocnt != 0){
+                temp->data = 2;
+                twocnt--;
+            }
             temp = temp->next;
         }
-        return newhead;
+        return head;
     }
 };
 
