@@ -24,20 +24,18 @@ int main() {
 
 
 pair<long long, long long> getMinMax(long long a[], int n) {
-    int minval = INT_MAX;
+    priority_queue<int>maxheap;
+    priority_queue<int,vector<int>,greater<int>>minheap;
     for(int i = 0;i<n;i++){
-        if(a[i] < minval){
-            minval = a[i];
-        }
+        maxheap.push(a[i]);
     }
-    int maxval = INT_MIN;
-        for(int i = 0;i<n;i++){
-        if(a[i] > maxval){
-            maxval = a[i];
-        }
+       for(int i = 0;i<n;i++){
+        minheap.push(a[i]);
     }
-    pair<long long,long long> ans;
-    ans.first = minval;
-    ans.second = maxval;
-    return ans;
+    long long minele = minheap.top();
+    long long maxele = maxheap.top();
+    pair<long long , long long> p;
+    p.first = minele;
+    p.second = maxele;
+    return p;
 }
