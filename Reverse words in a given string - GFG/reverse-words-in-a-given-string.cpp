@@ -10,32 +10,24 @@ class Solution
     //Function to reverse words in a given string.
     string reverseWords(string S) 
     { 
-        int i = S.length() - 1;
-        string ans = "";
-        while(i>=0){
-            while(i>=0 && S[i] == '.'){
-                i--;
-            }
-            int j = i;
-            if(i<0){
-                break;
-            }
-            while(i>=0 && S[i] != '.'){
-                i--;
-            }
-             if (ans.empty()) {
-            ans = ans.append(S.substr(i + 1, j - i));
-        } else {
-            ans = ans.append("." + S.substr(i + 1, j - i));
-        }
-            // if(ans.empty()){
-            //     ans = ans.append(S.substr(i+1,j-i));
-            // }
-            // else{
-            //     ans = ans.apppend("." + S.substr(i+1,j-i));
-            // }
-        }
-        return ans;
+       string ans = "";
+       string temp = "";
+       for(int i = S.length()-1;i>=0;i--){
+           if(S[i] == '.'){
+               reverse(temp.begin(),temp.end());
+               ans += temp;
+               ans.push_back('.');
+               temp = "";
+           }
+           else{
+               temp += S[i];
+           }
+       }
+        reverse(temp.begin(),temp.end());
+               ans += temp;
+               
+               
+      return ans;           
     } 
 };
 
